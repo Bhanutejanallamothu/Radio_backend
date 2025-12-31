@@ -7,6 +7,7 @@ const rjRoutes = require("./routes/rj.routes")
 const technicalRoutes = require("./routes/technical.routes")
 const newsRoutes = require("./routes/news.routes")
 const publicRoutes = require("./routes/public.routes")
+const announcementRoutes = require("./routes/announcements.routes")
 
 const app = express()
 
@@ -19,5 +20,6 @@ app.use("/api/rj", rjRoutes)
 app.use("/api/technical", technicalRoutes)
 app.use("/api/news", newsRoutes)
 app.use("/api/public", publicRoutes)
+app.use("/api", announcementRoutes)
 
 module.exports = app
