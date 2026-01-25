@@ -7,7 +7,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://6000-firebase-studio-1765370272139.cluster-xpmcxs2fjnhg6xvn446ubtgpio.cloudworkstations.dev"
+      "https://6000-firebase-studio-1765370272139.cluster-xpmcxs2fjnhg6xvn446ubtgpio.cloudworkstations.dev",
+      "https://signup-guardian.vercel.app/"
     ],
     credentials: true
   })
