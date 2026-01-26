@@ -33,6 +33,5 @@ router.get("/news", newsController.getAllNews)
 router.post("/news", newsController.createNews)
 router.put("/news/:id", newsController.updateNews)
 router.delete("/news/:id", newsController.deleteNews)
-router.patch("/news/:id/live", newsController.setLiveNews)
 
 module.exports = router
