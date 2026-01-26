@@ -1,28 +1,23 @@
 const PodcastScript = require("../models/PodcastScript")
 
 exports.createPodcast = async (req, res) => {
-  const podcast = await PodcastScript.create(req.body)
-  res.json(podcast)
+  const { title, topic, content, assignedTo } = req.body
+
+  const podcast = await PodcastScript.create({
+    title,
+    topic,
+    content,
+    assignedTo
+  })
+
+  res.status(201).json(podcast)
 }
 
-exports.getPodcasts = async (req, res) => {
+exports.getAllPodcasts = async (req, res) => {
   const podcasts = await PodcastScript.findAll({
-    order: [["updatedAt", "DESC"]]
+    order: [["createdAt", "DESC"]]
   })
   res.json(podcasts)
-}
-
-exports.updatePodcast = async (req, res) => {
-  await PodcastScript.update(req.body, {
-    where: { id: req.params.id }
-  })
-  const updated = await PodcastScript.findByPk(req.params.id)
-  res.json(updated)
-}
-
-exports.deletePodcast = async (req, res) => {
-  await PodcastScript.destroy({ where: { id: req.params.id } })
-  res.json({ success: true })
 }
 
 exports.getAssignedPodcasts = async (req, res) => {
@@ -33,10 +28,11 @@ exports.getAssignedPodcasts = async (req, res) => {
 }
 
 exports.markPodcastComplete = async (req, res) => {
-  await PodcastScript.update(
-    { status: "completed" },
-    { where: { id: req.params.id } }
-  )
-  const updated = await PodcastScript.findByPk(req.params.id)
-  res.json(updated)
+  const podcast = await PodcastScript.findByPk(req.params.id)
+  if (!podcast) return res.status(404).json({ message: "Not found" })
+
+  podcast.status = "completed"
+  await podcast.save()
+
+  res.json(podcast)
 }

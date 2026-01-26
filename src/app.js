@@ -8,6 +8,8 @@ const technicalRoutes = require("./routes/technical.routes")
 const newsRoutes = require("./routes/news.routes")
 const publicRoutes = require("./routes/public.routes")
 const announcementRoutes = require("./routes/announcements.routes")
+const podcastRoutes = require("./routes/podcast.routes")
+
 
 const app = express()
 
@@ -21,5 +23,5 @@ app.use("/api/technical", technicalRoutes)
 app.use("/api/creative/news", newsRoutes)
 app.use("/api/public", publicRoutes)
 app.use("/api/creative/announcements", announcementRoutes)
-
+app.use("/api", podcastRoutes)
 module.exports = app
