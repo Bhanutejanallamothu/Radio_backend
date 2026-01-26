@@ -18,7 +18,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/creative", creativeRoutes)
 app.use("/api/rj", rjRoutes)
 app.use("/api/technical", technicalRoutes)
-app.use("/api/news", newsRoutes)
+app.use("/api", newsRoutes)
 app.use("/api/public", publicRoutes)
 app.use("/api", announcementRoutes)
 
