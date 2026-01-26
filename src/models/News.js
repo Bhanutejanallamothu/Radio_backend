@@ -6,13 +6,13 @@ const News = sequelize.define("News", {
     type: DataTypes.STRING,
     allowNull: false
   },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
   source: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  isLive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
   }
 })
 
