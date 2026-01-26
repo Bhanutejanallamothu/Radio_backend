@@ -6,7 +6,7 @@ const creativeRoutes = require("./routes/creative.routes")
 const rjRoutes = require("./routes/rj.routes")
 const technicalRoutes = require("./routes/technical.routes")
 const publicRoutes = require("./routes/public.routes")
-const podcastRoutes = require("./routes/podcast.routs")
+const podcastRoutes = require("./routes/podcast.routes")
 
 const app = express()
 
