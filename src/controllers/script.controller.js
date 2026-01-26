@@ -29,7 +29,7 @@ exports.deleteScript = async (req, res) => {
   res.json({ success: true })
 }
 
-exports.makeLive = async (req, res) => {
+exports.setLiveScript = async (req, res) => {
   await Script.update({ isLive: false }, { where: {} })
   await Script.update(
     { isLive: true },
