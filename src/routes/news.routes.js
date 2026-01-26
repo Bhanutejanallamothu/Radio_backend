@@ -2,15 +2,55 @@ const express = require("express")
 const auth = require("../middleware/auth")
 const role = require("../middleware/role")
 const {
-  fetchNews,
-  saveAssignedNews,
-  getAssignedNewsForRJ
+  createNews,
+  getAllNews,
+  setLiveNews,
+  getLiveNews,
+  deleteNews
 } = require("../controllers/news.controller")
 
 const router = express.Router()
 
-router.get("/fetch", auth, role(["creative"]), fetchNews)
-router.post("/save", auth, role(["creative"]), saveAssignedNews)
-router.get("/rj", auth, role(["rj"]), getAssignedNewsForRJ)
+router.post(
+  "/creative/news",
+  auth,
+  role(["creative"]),
+  createNews
+)
+
+router.get(
+  "/creative/news",
+  auth,
+  role(["creative"]),
+  getAllNews
+)
+
+router.patch(
+  "/creative/news/:id/live",
+  auth,
+  role(["creative"]),
+  setLiveNews
+)
+
+router.delete(
+  "/creative/news/:id",
+  auth,
+  role(["creative"]),
+  deleteNews
+)
+
+router.get(
+  "/rj/live-news",
+  auth,
+  role(["rj"]),
+  getLiveNews
+)
+
+router.get(
+  "/technical/live-news",
+  auth,
+  role(["technical"]),
+  getLiveNews
+)
 
 module.exports = router
