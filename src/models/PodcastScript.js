@@ -14,12 +14,12 @@ const PodcastScript = sequelize.define("PodcastScript", {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  assignedTo: {
-    type: DataTypes.INTEGER,
-    allowNull: false
+  isLive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   },
   status: {
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM("pending", "completed"),
     defaultValue: "pending"
   }
 })
