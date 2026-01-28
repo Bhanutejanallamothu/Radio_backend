@@ -26,11 +26,9 @@ router.get("/news", newsController.getAllNews)
 router.post("/news", newsController.createNews)
 router.put("/news/:id", newsController.updateNews)
 router.delete("/news/:id", newsController.deleteNews)
-
-router.get("/podcasts", podcastController.getAllPodcasts)
 router.post("/podcasts", podcastController.createPodcast)
-router.put("/podcasts/:id", podcastController.updatePodcastByCreative)
+router.get("/podcasts", podcastController.getAllPodcastsCreative)
+router.patch("/podcasts/:id/recording", podcastController.markForRecording)
+router.patch("/podcasts/:id", podcastController.updatePodcast)
 router.delete("/podcasts/:id", podcastController.deletePodcast)
-router.patch("/podcasts/:id/live", podcastController.setLivePodcast)
-
 module.exports = router

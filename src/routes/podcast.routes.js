@@ -7,13 +7,16 @@ const role = require("../middleware/role")
 const podcastController = require("../controllers/podcast.controller")
 
 // ================= CREATIVE =================
+
+// Get all podcasts (draft + recording + completed)
 router.get(
   "/creative/podcasts",
   auth,
   role("creative"),
-  podcastController.getAllPodcasts
+  podcastController.getAllPodcastsCreative
 )
 
+// Create podcast (draft)
 router.post(
   "/creative/podcasts",
   auth,
@@ -21,13 +24,15 @@ router.post(
   podcastController.createPodcast
 )
 
+// Edit podcast anytime
 router.put(
   "/creative/podcasts/:id",
   auth,
   role("creative"),
-  podcastController.updatePodcastByCreative
+  podcastController.updatePodcast
 )
 
+// Delete podcast anytime
 router.delete(
   "/creative/podcasts/:id",
   auth,
@@ -35,29 +40,38 @@ router.delete(
   podcastController.deletePodcast
 )
 
+// Mark podcast for recording (same as live script)
 router.patch(
-  "/creative/podcasts/:id/live",
+  "/creative/podcasts/:id/recording",
   auth,
   role("creative"),
-  podcastController.setLivePodcast
+  podcastController.markForRecording
 )
 
 // ================= RJ =================
+
+// Get podcast marked for recording (same for all RJs)
 router.get(
-  "/rj/podcasts",
+  "/rj/podcast",
   auth,
   role("rj"),
-  podcastController.getRJPodcasts
+  podcastController.getPodcastForRJ
 )
 
-router.put(
-  "/rj/podcasts/:id",
+// Mark podcast completed
+router.patch(
+  "/rj/podcast/:id/complete",
   auth,
   role("rj"),
-  podcastController.updatePodcastByRJ
+  podcastController.markPodcastCompleted
 )
 
-// ================= PUBLIC (LIVE) =================
-router.get("/public/podcast/live", podcastController.getLivePodcast)
+// ================= PUBLIC =================
+
+// Optional: expose currently recording podcast (if needed later)
+router.get(
+  "/public/podcast/recording",
+  podcastController.getPodcastForRJ
+)
 
 module.exports = router

@@ -13,8 +13,8 @@ router.use(auth, role("rj"))
 
 router.get("/live-script", scriptController.getLiveScript)
 
-router.get("/podcast", podcastController.getLivePodcast)
-router.put("/podcast/:id", podcastController.updatePodcastByRJ)
+router.get("/podcast", podcastController.getPodcastForRJ)
+router.patch("/podcast/:id/complete", podcastController.markPodcastCompleted)
 
 router.get("/news", newsController.getAllNews)
 router.get("/announcements", announcementController.getAnnouncements)
