@@ -2,6 +2,8 @@ require("dotenv").config()
 const sequelize = require("./config/db")
 const app = require("./app")
 const cors = require("cors")
+const dns = require("dns")
+dns.setDefaultResultOrder("ipv4first")
 
 app.use(
   cors({
