@@ -13,6 +13,25 @@ exports.getSuggestions = async (req, res) => {
 }
 
 exports.deleteSuggestion = async (req, res) => {
-  await SongSuggestion.destroy({ where: { id: req.params.id } })
+  await SongSuggestion.destroy({
+    where: { id: req.params.id }
+  })
   res.json({ success: true })
+}
+
+exports.deleteMultipleSuggestions = async (req, res) => {
+  const { ids } = req.body
+
+  if (!Array.isArray(ids) || ids.length === 0) {
+    return res.status(400).json({ message: "No song IDs provided" })
+  }
+
+  await SongSuggestion.destroy({
+    where: { id: ids }
+  })
+
+  res.json({
+    success: true,
+    deletedIds: ids
+  })
 }
