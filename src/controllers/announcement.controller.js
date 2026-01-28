@@ -31,7 +31,10 @@ exports.deleteAnnouncement = async (req, res) => {
 
 exports.getPublicAnnouncements = async (req, res) => {
   const announcements = await Announcement.findAll({
-    order: [["createdAt", "DESC"]]
+    order: [["createdAt", "DESC"]],
+    limit: 20
   })
+
   res.json(announcements)
 }
+
