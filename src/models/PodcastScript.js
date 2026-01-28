@@ -1,27 +1,37 @@
 const { DataTypes } = require("sequelize")
 const sequelize = require("../config/db")
 
-const PodcastScript = sequelize.define("PodcastScript", {
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false
+const PodcastScript = sequelize.define(
+  "podcast_scripts",
+  {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    topic: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    assignedTo: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    status: {
+      type: DataTypes.ENUM("pending", "completed"),
+      defaultValue: "pending"
+    },
+    isLive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   },
-  topic: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  isLive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
-  },
-  status: {
-    type: DataTypes.ENUM("pending", "completed"),
-    defaultValue: "pending"
+  {
+    underscored: true
   }
-})
+)
 
 module.exports = PodcastScript

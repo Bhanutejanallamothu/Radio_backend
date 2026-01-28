@@ -29,6 +29,8 @@ router.delete("/news/:id", newsController.deleteNews)
 
 router.get("/podcasts", podcastController.getAllPodcasts)
 router.post("/podcasts", podcastController.createPodcast)
+router.put("/podcasts/:id", podcastController.updatePodcastByCreative)
+router.delete("/podcasts/:id", podcastController.deletePodcast)
 router.patch("/podcasts/:id/live", podcastController.setLivePodcast)
 
 module.exports = router

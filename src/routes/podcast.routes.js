@@ -1,42 +1,63 @@
 const express = require("express")
-const auth = require("../middleware/auth")
-const role = require("../middleware/role")
-const podcastController = require("../controllers/podcast.controller")
-
 const router = express.Router()
 
-router.use(auth)
+const auth = require("../middleware/auth")
+const role = require("../middleware/role")
 
-// CREATIVE
+const podcastController = require("../controllers/podcast.controller")
+
+// ================= CREATIVE =================
 router.get(
   "/creative/podcasts",
-  role(["creative"]),
+  auth,
+  role("creative"),
   podcastController.getAllPodcasts
 )
 
 router.post(
   "/creative/podcasts",
-  role(["creative"]),
+  auth,
+  role("creative"),
   podcastController.createPodcast
+)
+
+router.put(
+  "/creative/podcasts/:id",
+  auth,
+  role("creative"),
+  podcastController.updatePodcastByCreative
+)
+
+router.delete(
+  "/creative/podcasts/:id",
+  auth,
+  role("creative"),
+  podcastController.deletePodcast
 )
 
 router.patch(
   "/creative/podcasts/:id/live",
-  role(["creative"]),
+  auth,
+  role("creative"),
   podcastController.setLivePodcast
 )
 
-// RJ
+// ================= RJ =================
 router.get(
-  "/rj/podcast",
-  role(["rj"]),
-  podcastController.getLivePodcast
+  "/rj/podcasts",
+  auth,
+  role("rj"),
+  podcastController.getRJPodcasts
 )
 
-router.patch(
-  "/rj/podcast/:id/complete",
-  role(["rj"]),
-  podcastController.markPodcastComplete
+router.put(
+  "/rj/podcasts/:id",
+  auth,
+  role("rj"),
+  podcastController.updatePodcastByRJ
 )
+
+// ================= PUBLIC (LIVE) =================
+router.get("/public/podcast/live", podcastController.getLivePodcast)
 
 module.exports = router
