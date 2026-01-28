@@ -1,6 +1,3 @@
-const dns = require("dns")
-dns.setDefaultResultOrder("ipv4first")
-
 require("dotenv").config()
 
 const cors = require("cors")
@@ -19,8 +16,18 @@ app.use(
   })
 )
 
-sequelize.sync().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`)
-  })
-})
+;(async () => {
+  try {
+    await sequelize.authenticate()
+    console.log("Database connected successfully")
+
+    await sequelize.sync()
+
+    app.listen(process.env.PORT, () => {
+      console.log(`Server running on port ${process.env.PORT}`)
+    })
+  } catch (error) {
+    console.error("Failed to start server:", error)
+    process.exit(1)
+  }
+})()
